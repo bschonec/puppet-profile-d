@@ -1,10 +1,9 @@
 # TODO: add documentation in line with
 # http://docs.puppetlabs.com/guides/style_guide.html#puppet-doc
-class profile_d(
-  $hash_script  = {}
+class profile_d (
+  Hash[String[1],String[1]] $hash_script  = {}
 ) {
-
-  file {'/etc/profile.d':
+  file { '/etc/profile.d':
     ensure => directory,
     owner  => root,
     group  => root,
@@ -20,7 +19,5 @@ if [ -d "$HOME/.profile.d" ]; then
 fi',
   }
 
-  validate_hash($hash_script)
   create_resources(profile_d::script, $hash_script)
-
 }
